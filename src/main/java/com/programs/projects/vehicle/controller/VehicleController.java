@@ -17,35 +17,34 @@ public class VehicleController {
     private static final String ADD_VEHICLES = "/form/add/vehicle";
     private static final String UPDATE_VEHICLES = "/form/update/vehicle";
     private static final String DELETE_VEHICLES ="/form/delete/vehicle";
-
     @Autowired
     private VehicleRepository vehicleRepository;
 
     @Autowired
     private VehicleService vehicleService;
 
-    @GetMapping(value = GET_ALL_VEHICLES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @GetMapping(value = GET_ALL_VEHICLES, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public List<Vehicle> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
 
-    @GetMapping(value = GET_VEHICLES_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @GetMapping(value = GET_VEHICLES_BY_ID, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public Vehicle getVehicleByVehicleID(@PathVariable String id) {
         return vehicleService.getVehicleByID(id);
     }
 
-    @PostMapping(value = ADD_VEHICLES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @PostMapping(value = ADD_VEHICLES, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public void addVehicle(@RequestBody Vehicle vehicle) {
         vehicleService.addVehicle(vehicle);
     }
 
-    @PutMapping (value = UPDATE_VEHICLES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @PutMapping (value = UPDATE_VEHICLES, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public void updateVehicle(@RequestBody Vehicle vehicle) {
         vehicleService.updateVehicle(vehicle);
 
     }
 
-    @DeleteMapping(value = DELETE_VEHICLES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = DELETE_VEHICLES, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public void deleteVehicle(@RequestBody Vehicle vehicle) {
         vehicleService.deleteVehicle(vehicle);
 
