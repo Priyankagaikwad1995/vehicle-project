@@ -2,12 +2,16 @@ package com.programs.projects.vehicle.controller;
 import com.programs.projects.vehicle.model.Employee;
 import com.programs.projects.vehicle.service.EmployeeService;
 import com.programs.projects.vehicle.repo.EmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 public class EmployeeController {
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -23,11 +27,13 @@ public class EmployeeController {
 
     @GetMapping(value = GET_ALL_EMPLOYEES, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public List<Employee> getAllEmployee() {
+        logger.debug("Get All Employees api called.");
         return employeeService.getAllEmployee();
     }
 
     @GetMapping(value = GET_EMPLOYEE_BY_ID, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
     public Employee getEmployeeByEmployeeID(@PathVariable String id) {
+        logger.debug("Get Employee Api called for employee Id: {}", id);
         return employeeService.getEmployeeByID(id);
     }
     @PostMapping(value = ADD_EMPLOYEE, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE, MimeTypeUtils.APPLICATION_XML_VALUE})
