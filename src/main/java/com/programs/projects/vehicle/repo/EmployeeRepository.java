@@ -1,17 +1,15 @@
-
 package com.programs.projects.vehicle.repo;
-
 import com.programs.projects.vehicle.model.Employee;
-import com.programs.projects.vehicle.model.Vehicle;
+import com.programs.projects.vehicle.service.EmployeeService;
 import org.springframework.stereotype.Repository;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.*;
-
 import static java.util.Optional.ofNullable;
 
 @Repository
 public class EmployeeRepository {
-
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeRepository.class);
 
     private static List<Employee> Employees = new ArrayList<>(Arrays.asList(
             new Employee("101", "abc", "55000", "Satara", "Software Engineer", "Owned", "test"),
@@ -28,7 +26,7 @@ public class EmployeeRepository {
     }
 
     public void updateEmployee(Employee employee) {
-        System.out.println("Employee details : " + employee);
+        logger.debug("Employee Details : {} ", employee);
         for (int i = 0; i < Employees.size(); i++) {
             Employee e = Employees.get(i);
             if (e.getEmpId().equals(employee.getEmpId())) {
@@ -36,8 +34,8 @@ public class EmployeeRepository {
                 break;
             }
         }
+        logger.info("Employee is updated successfully. Employee Details : {}", employee);
     }
-
 
     public void deleteEmployee(Employee employee) {
         Employees.removeIf(e -> e.getEmpId().equals(employee.getEmpId()));
@@ -51,7 +49,6 @@ public class EmployeeRepository {
         ofNullable(employeeInput.getEmpType()).ifPresent(value -> employeeOutput.setEmpType(value));
         ofNullable(employeeInput.getRemark()).ifPresent(value -> employeeOutput.setRemark(value));
     }
-
     public Employee getEmployeeByID(String id) {
       return Employees.stream().filter(e -> e.getEmpId().equals(id)).findFirst().get();
     }
