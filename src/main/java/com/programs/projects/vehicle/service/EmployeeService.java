@@ -21,7 +21,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeByID(String id) {
-        return null;
+        return employeeRepository.getEmployeeByID(id);
     }
 
     public void addEmployee(Employee employee) {

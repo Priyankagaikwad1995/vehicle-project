@@ -50,7 +50,9 @@ public class EmployeeRepository {
         ofNullable(employeeInput.getEmpSalary()).ifPresent(value -> employeeOutput.setEmpSalary(value));
         ofNullable(employeeInput.getEmpType()).ifPresent(value -> employeeOutput.setEmpType(value));
         ofNullable(employeeInput.getRemark()).ifPresent(value -> employeeOutput.setRemark(value));
+    }
 
-
+    public Employee getEmployeeByID(String id) {
+      return Employees.stream().filter(e -> e.getEmpId().equals(id)).findFirst().get();
     }
 }
